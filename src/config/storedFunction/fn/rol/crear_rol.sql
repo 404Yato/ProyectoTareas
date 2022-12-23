@@ -3,6 +3,7 @@
  * Creator: Yhuun
  * Description: Crea rol
  * Date: 22-12-2022
+ * select * from fn_crear_rol('ADMIN')
  */
 CREATE OR REPLACE FUNCTION fn_crear_rol(
 	IN  rol character varying)

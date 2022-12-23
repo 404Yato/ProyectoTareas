@@ -7,5 +7,6 @@ const defaultPath = process.env.DEFAULT_PATH_API;
 
 router.get(`/${defaultPath}/usuario/obtener-usuario`, usuarioController.getUsuarios);
 router.post(`/${defaultPath}/usuario/crear-usuario`, usuarioController.crearUsuario);
+router.post(`/${defaultPath}/usuario/validar-login-usuario`, usuarioController.validarLoginUsuario);
 
 module.exports = router;

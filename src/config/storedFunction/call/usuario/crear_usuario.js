@@ -6,7 +6,7 @@ const db = require('../../../db/config');
  * @returns {Promise<[]>} Retorna resultado de la ejecución
  */
 
-const crearUsuario = async (body) => {
+const fnCrearUsuario = async (body) => {
     try {
 
         const result = await db.sequelize.query(`select * from fn_crear_usuario(?, ?, ?, ?, ?, ?)`, {
@@ -25,5 +25,5 @@ const crearUsuario = async (body) => {
     }
 }
 module.exports = {
-    crearUsuario
+    fnCrearUsuario
 }

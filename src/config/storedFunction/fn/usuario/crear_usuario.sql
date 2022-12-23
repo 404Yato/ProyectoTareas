@@ -20,11 +20,13 @@ AS $function$
 DECLARE
 v_id_usuario integer;
 	BEGIN
-		IF(rol is null or not exists(select r.id_rol from rol as r where r.id_rol = rol ))then
+		IF (p_username in (select u.username from usuario as u)) then
+			RAISE 'El usuario ya existe';
+		ELSEIF (p_rol is null or not exists(select r.id_rol from rol as r where r.id_rol = p_rol ))then
 			RAISE 'Debe ingresar un rol válido';
 		END IF;
 		INSERT INTO usuario (name, lastname, email, password, username, rol_id_rol)
-			VALUES(nombre, apellido, email, pass, userName, rol);
+			VALUES(p_nombre, p_apellido, p_email, p_pass, p_username, p_rol);
 			
 		v_id_usuario:= lastval();
 		RETURN QUERY
@@ -33,4 +35,5 @@ v_id_usuario integer;
 		when others then 
 			RAISE;
 	END;
+
 $function$;

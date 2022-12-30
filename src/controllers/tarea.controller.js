@@ -21,6 +21,8 @@ const getTareas = async (req, res) => {
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }
+const { Tarea } = require("../model/tareaModel");
+const { sendOk, internalError } = require("../utils/http");
 
 const delTarea = async (req, res)=> {
     try{
@@ -60,6 +62,6 @@ const getTareas = async (req, res) => {
 
 
 module.exports = {
-    delTarea,
-    getTareas
+    getTareas,
+    delTarea
 }

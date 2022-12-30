@@ -1,6 +1,7 @@
 const db = require("../config/db/config");
 
-const { fnCrearUsuario, fnValidarLoginUsuario, fnObtenerUsuarios } = require('../config/storedFunction/call/usuario');
+const { fnCrearUsuario, fnValidarLoginUsuario, fnObtenerUsuarios, fnObtenerUsuarioById } = require('../config/storedFunction/call/usuario');
+const { User } = require("../model/userModel");
 const { sendOk, internalError } = require("../utils/http");
 
 /**
@@ -29,7 +30,9 @@ const getUsuarios = async (req, res) => {
 const crearUsuario = async (req, res) => {
     try {
 
-        const [{ id_usuario }] = await fnCrearUsuario(req.body);
+        const user = new User(req.body);
+
+        const [{ id_usuario }] = await fnCrearUsuario(user);
 
         sendOk(res, `Usuario ${id_usuario} ha sido creado correctamente`, { id_usuario });
 
@@ -58,8 +61,24 @@ const validarLoginUsuario = async (req, res) => {
     }
 }
 
+
+const obtenerUsuarioById = async (req, res) => {
+    try {
+
+        const { idUser } = req.params
+
+        const result = await fnObtenerUsuarioById(idUser);
+
+        sendOk(res, `Usuario con el id ${idUser} encontrado correctamente`, ...result);
+
+    } catch (error) {
+        internalError(res, `${error.message || 'error no controlado'}`, error);
+    }
+}
+
 module.exports = {
     getUsuarios,
     crearUsuario,
-    validarLoginUsuario
+    validarLoginUsuario,
+    obtenerUsuarioById
 }

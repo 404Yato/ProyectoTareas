@@ -1,3 +1,6 @@
+const db = require("../config/db/config")
+
+const {deleteTarea: fnEliminarTarea} = require('../config/storedFunction/call/tarea/eliminar_tarea')
 const db = require("../config/db/config");
 const { fnObtenerTareas } = require("../config/storedFunction/call/tarea");
 
@@ -16,4 +19,20 @@ const getTareas = async (req, res) => {
     } catch (error) {
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
+}
+
+const delTarea = async (req, res)=> {
+    try{
+        console.log(req.params)
+        const {idTarea} = req.params
+        const resp = await fnEliminarTarea(idTarea)
+        console.log(resp)
+        res.status('200');
+        return;
+    }catch(error){
+        console.log(error)
+    }
+}
+module.exports = {
+    delTarea
 }

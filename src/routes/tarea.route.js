@@ -9,5 +9,6 @@ router.get(`/${defaultPath}/tarea/obtener-tareas`, tareaController.getTareas);
 router.post(`/${defaultPath}/tarea/crearTarea`, tareaController.crearTarea);
 router.delete(`/${defaultPath}/tarea/eliminarTarea/:idTarea`, tareaController.eliminarTarea);
 
+router.post(`/${defaultPath}/tarea/modTarea/:idTarea`, tareaController.modTarea);
 
 module.exports = router;

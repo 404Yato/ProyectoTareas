@@ -1,14 +1,20 @@
-const db = require ('../../../db/config');
+const db = require('../../../db/config');
 
-const deleteTarea = async (idTarea) =>{
-    try{
-        const result = await db.sequelize.query(`SELECT public.fn_delete_tarea(${idTarea})`,{
+/**
+ * 
+ * @param {Number} idTarea 
+ * @returns 
+ */
+const deleteTarea = async (idTarea) => {
+    try {
+        const result = await db.sequelize.query(`SELECT * FROM fn_delete_tarea(${idTarea})`, {
             type: db.Sequelize.QueryTypes.DELETE
-        })
-    }catch (e){
+        });
+        return result;
+    } catch (e) {
         throw e;
     }
 }
-module.exports={
+module.exports = {
     deleteTarea
 }

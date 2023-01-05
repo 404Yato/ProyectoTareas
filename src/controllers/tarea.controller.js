@@ -39,9 +39,9 @@ const eliminarTarea = async (req, res) => {
     try {
         const { idTarea } = req.params
 
-        const resp = await fnEliminarTarea(idTarea)
-        console.log(resp)
-        sendOk(res, `Tarea con el id ${idTarea} eliminada`, resp);
+        const [{ fn_delete_tarea: id_tarea }] = await fnEliminarTarea(idTarea)
+
+        sendOk(res, `Tarea con el id ${idTarea} eliminada`, id_tarea);
 
     } catch (error) {
         console.log(error);

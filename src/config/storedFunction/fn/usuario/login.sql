@@ -1,7 +1,7 @@
 
 /**
  * Name: fn_validar_usuario
- * Creator: Yato
+ * Creator: Cristian Tapia
  * Description: Validar login usuario
  * Date: 22-12-2022
  * select * from fn_validar_usuario('prueba','prueba')

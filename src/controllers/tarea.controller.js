@@ -1,6 +1,9 @@
 const db = require("../config/db/config")
 
-const {deleteTarea: fnEliminarTarea} = require('../config/storedFunction/call/tarea/eliminar_tarea')
+const { fnObtenerTareas } = require("../config/storedFunction/call/tarea");
+const { deleteTarea: fnEliminarTarea } = require('../config/storedFunction/call/tarea/eliminar_tarea')
+const { Tarea } = require("../model/tareaModel");
+const { sendOk, internalError } = require("../utils/http");
 
 const getTareas = async (req,res)=> {
     try{
@@ -19,10 +22,11 @@ const eliminarTarea = async (req, res)=> {
         console.log(resp)
         res.status('200');
         return;
-    }catch(error){
+    } catch (error) {
         console.log(error)
     }
 }
+
 module.exports = {
     eliminarTarea,
     getTareas

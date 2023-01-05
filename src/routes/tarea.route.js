@@ -4,7 +4,8 @@ const router = express.Router();
 
 const defaultPath = process.env.DEFAULT_PATH_API;
 
-router.delete(`/${defaultPath}/tarea/delTarea/:idTarea`, tareaController.delTarea);
+router.get(`/${defaultPath}/tarea/obtener-tarea`, tareaController.getTareas);
+router.delete(`/${defaultPath}/tarea/eliminarTarea/:idTarea`, tareaController.eliminarTarea);
 
 
 module.exports = router;

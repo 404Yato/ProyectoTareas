@@ -7,12 +7,12 @@
  */
 
 CREATE OR REPLACE FUNCTION fn_crear_usuario(
-	IN nombre character varying,
-	IN apellido character varying,
-	IN email character varying,
-	IN pass character varying,
-	IN username character varying,
-	IN rol integer)
+	IN p_nombre character varying,
+	IN p_apellido character varying,
+	IN p_email character varying,
+	IN p_pass character varying,
+	IN p_username character varying,
+	IN p_rol integer)
 	
 	RETURNS TABLE(id_usuario integer)
 LANGUAGE 'plpgsql'

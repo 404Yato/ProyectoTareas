@@ -1,7 +1,7 @@
 
 
-const { obtenerRols, fnCrearRol } = require('../config/storedFunction/call/rol');
-const { sendOk } = require('../utils/http');
+const { obtenerRols, crearRol } = require('../config/storedFunction/call/rol');
+const { sendOk, internalError } = require('../utils/http');
 
 const getRoles = async (req, res) => {
     try {
@@ -15,9 +15,9 @@ const getRoles = async (req, res) => {
     }
 }
 
-const crearRol = async (req, res) => {
+const crearRols = async (req, res) => {
     try {
-        const [{ id_rol }] = await fnCrearRol(req.body);
+        const [{ id_rol }] = await crearRol(req.body);
 
         sendOk(res, `Rol con el id ${id_rol} creado correctamente`, { id_rol });
 
@@ -30,5 +30,5 @@ const crearRol = async (req, res) => {
 }
 module.exports = {
     getRoles,
-    crearRol
+    crearRols
 }

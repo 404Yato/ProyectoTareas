@@ -32,9 +32,9 @@ const crearUsuario = async (req, res) => {
 
         const user = new User(req.body);
 
-        const resp = await fnCrearUsuario(user);
+        const [{ id_usuario }] = await fnCrearUsuario(user);
 
-        sendOk(res, `Usuario ${resp} ha sido creado correctamente`, { resp });
+        sendOk(res, `Usuario ${id_usuario} ha sido creado correctamente`, { id_usuario });
 
     } catch (error) {
 

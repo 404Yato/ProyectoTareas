@@ -10,10 +10,9 @@ const crearTarea = async (req, res) => {
     try {
 
         const tar = new Tarea(req.body);
-        console.log(tar);
         const [{ id_tarea }] = await fnCrearTarea(tar);
 
-        sendOk(res, `Tarea ${id_tarea} creada correctamente`, { id_tarea });
+        sendOk(res, `Tarea con el id ${id_tarea} creada correctamente`, { id_tarea });
 
     } catch (error) {
 
@@ -22,7 +21,7 @@ const crearTarea = async (req, res) => {
 }
 
 /**
- * Obtien todos los usuarios del sistema
+ * Obtien todos las tareas del sistema
  * @param {*} req 
  * @param {*} res 
  */

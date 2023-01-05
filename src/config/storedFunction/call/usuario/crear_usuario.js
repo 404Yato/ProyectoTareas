@@ -11,7 +11,7 @@ const fnCrearUsuario = async (user) => {
     try {
 
         const result = await db.sequelize.query(`select * from fn_crear_usuario(?, ?, ?, ?, ?, ?)`, {
-            type: db.Sequelize.QueryTypes.INSERT, replacements: [
+            type: db.Sequelize.QueryTypes.SELECT, replacements: [
                 user.nombre,
                 user.apellido,
                 user.email,
@@ -20,7 +20,7 @@ const fnCrearUsuario = async (user) => {
                 user.rol
             ]
         });
-        return result[0];
+        return result;
     } catch (e) {
         throw e;
     }

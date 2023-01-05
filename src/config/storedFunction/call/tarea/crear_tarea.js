@@ -1,16 +1,15 @@
 const db = require('../../../db/config');
 
-
 /**
- * crea usuario
- *  @param {tarea} body Propiedades a gurdar en la tabla usuario
+ * crea tarea
+ *  @param {object} tarea Propiedades a gurdar en la tabla tarea
  * @returns {Promise<[]>} Retorna resultado de la ejecución
  */
 const fnCrearTarea = async (tarea) => {
     try {
 
         const result = await db.sequelize.query(`select * from fn_crear_tarea(?, ?, ?, ?, ?, ?, ?, ?)`, {
-            type: db.Sequelize.QueryTypes.INSERT, replacements: [
+            type: db.Sequelize.QueryTypes.SELECT, replacements: [
                 tarea.descripcion,
                 tarea.nombre_tarea,
                 tarea.fecha_inicio,
@@ -21,7 +20,7 @@ const fnCrearTarea = async (tarea) => {
                 tarea.id_nivel_importancia,
             ]
         });
-        return result[0];
+        return result;
     } catch (e) {
         throw e;
     }

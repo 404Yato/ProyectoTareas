@@ -1,7 +1,7 @@
 const db = require('../../../db/config');
 
 /**
- * Obtener todos los usuarios
+ * Obtener todos las tareas
  * @returns {Promise<[Object]>} Retorna todos los usuarios
  */
 

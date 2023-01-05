@@ -4,7 +4,7 @@ const database = process.env.DB_NAME;
 const host = process.env.DB_HOST;
 const userDb = process.env.DB_USERNAME;
 const userPass = process.env.DB_PASSWORD;
-const dialectDb = process.env.DB_DIALECT.toString();
+const dialectDb = process.env.DB_DIALECT;
 const port = process.env.DB_PORT;
 
 const sequelize = new Sequelize(database, userDb, userPass, {

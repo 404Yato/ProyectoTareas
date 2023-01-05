@@ -1,9 +1,25 @@
 const db = require("../config/db/config")
 
-const { fnObtenerTareas } = require("../config/storedFunction/call/tarea");
+const { fnObtenerTareas, fnCrearTarea } = require("../config/storedFunction/call/tarea");
 const { deleteTarea: fnEliminarTarea } = require('../config/storedFunction/call/tarea/eliminar_tarea')
 const { Tarea } = require("../model/tareaModel");
 const { sendOk, internalError } = require("../utils/http");
+
+
+const crearTarea = async (req, res) => {
+    try {
+
+        const tar = new Tarea(req.body);
+        console.log(tar);
+        const [{ id_tarea }] = await fnCrearTarea(tar);
+
+        sendOk(res, `Tarea ${id_tarea} creada correctamente`, { id_tarea });
+
+    } catch (error) {
+
+        internalError(res, `${error.message || 'error no controlado'}`, error);
+    }
+}
 
 /**
  * Obtien todos los usuarios del sistema
@@ -41,6 +57,7 @@ const delTarea = async (req, res) => {
 }
 
 module.exports = {
+    crearTarea,
     getTareas,
     delTarea
 }

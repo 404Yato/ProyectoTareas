@@ -6,5 +6,3 @@ module.exports = {
     rolController,
     tareaController
 }
-// hola
-//hola 2

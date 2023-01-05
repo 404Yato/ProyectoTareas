@@ -4,7 +4,7 @@ const { crearUsuario: fnCrearUsuario } = require('../config/storedFunction/call/
 
 const getUsuarios = async (req, res) => {
     try {
-        const resp = await db.sequelize.query(`select * from rol`, { type: db.Sequelize.QueryTypes.SELECT });
+        const resp = await db.sequelize.query(`select * from usuario`, { type: db.Sequelize.QueryTypes.SELECT });
         console.log(resp)
     } catch (error) {
         console.log(error)

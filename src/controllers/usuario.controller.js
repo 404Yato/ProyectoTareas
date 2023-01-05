@@ -11,11 +11,8 @@ const { sendOk, internalError } = require("../utils/http");
  */
 const getUsuarios = async (req, res) => {
     try {
-
-        const resp = await fnObtenerUsuarios();
-
-        sendOk(res, `Usuarios obtenidos correctamente`, resp);
-
+        const resp = await db.sequelize.query(`select * from usuario`, { type: db.Sequelize.QueryTypes.SELECT });
+        console.log(resp)
     } catch (error) {
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }

@@ -26,7 +26,7 @@ const getUsuarios = async (req, res) => {
  */
 const crearUsuario = async (req, res) => {
     try {
-
+        
         const user = new User(req.body);
 
         const [{ id_usuario }] = await fnCrearUsuario(user);
@@ -34,7 +34,6 @@ const crearUsuario = async (req, res) => {
         sendOk(res, `Usuario ${id_usuario} ha sido creado correctamente`, { id_usuario });
 
     } catch (error) {
-
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }

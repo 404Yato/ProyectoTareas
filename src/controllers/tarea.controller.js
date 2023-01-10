@@ -1,7 +1,7 @@
 const { fnObtenerTareas, fnCrearTarea, fnModificarTarea } = require("../config/storedFunction/call/tarea");
 const { deleteTarea: fnEliminarTarea } = require('../config/storedFunction/call/tarea/eliminar_tarea')
 const { Tarea } = require("../model/tareaModel");
-const { sendOk, internalError } = require("../utils/http");
+const { sendOk, internalError, badRequest } = require("../utils/http");
 
 
 const crearTarea = async (req, res) => {
@@ -59,10 +59,9 @@ const modTarea = async (req, res) => {
         const { idTarea } = req.params
         const tarea = new Tarea(req.body)
         const [{ id_tarea }] = await fnModificarTarea(idTarea, tarea)
-        console.log(id_tarea)
         sendOk(res, `Tarea ${id_tarea} ha sido modificada correctamente`, { id_tarea });
     } catch (error) {
-        console.log(error)
+        internalError(res, `${error.message || 'error no controlado'}`, error); 
     }
 }
 

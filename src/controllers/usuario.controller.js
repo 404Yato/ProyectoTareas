@@ -1,6 +1,7 @@
 const db = require("../config/db/config");
 
-const { fnCrearUsuario, fnValidarLoginUsuario, fnObtenerUsuarios, fnObtenerUsuarioById } = require('../config/storedFunction/call/usuario');
+const { fnCrearUsuario, fnValidarLoginUsuario, fnObtenerUsuarios, fnObtenerUsuarioById, fnEliminarUsuario} = require('../config/storedFunction/call/usuario');
+const { fnModificarUsuario } = require("../config/storedFunction/call/usuario/modificar_usuario");
 const { User } = require("../model/userModel");
 const { sendOk, internalError } = require("../utils/http");
 
@@ -39,6 +40,31 @@ const crearUsuario = async (req, res) => {
     }
 }
 
+const eliminarUsuario = async (req, res) => {
+    try {
+        const { idUser } = req.params
+
+        const [{ fn_eliminar_usuario: id_user }] = await fnEliminarUsuario(idUser)
+
+        sendOk(res, `Usuario con el id ${idUser} eliminado`, id_user);
+
+    } catch (error) {
+        console.log(error);
+        internalError(res, `${error.message || 'error no controlado'}`, error);
+    }
+}
+
+const modUsuario = async (req,res) =>{
+    try {
+        const { idUser } = req.params
+        const user = new User(req.body)
+        const [{ id_user }] = await fnModificarUsuario(idUser,user)
+        console.log(id_user)
+        sendOk(res,`Usuario ${ id_user } ha sido modificado correctamente`, { id_user })
+    } catch (error) {
+        console.log(error)
+    }
+}
 /**
  * Validar login usuario
  * @param {String} req Se obtiene el username y pass del body
@@ -73,9 +99,12 @@ const obtenerUsuarioById = async (req, res) => {
     }
 }
 
+
 module.exports = {
     getUsuarios,
     crearUsuario,
     validarLoginUsuario,
-    obtenerUsuarioById
+    obtenerUsuarioById,
+    eliminarUsuario,
+    modUsuario
 }

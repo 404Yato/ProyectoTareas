@@ -67,15 +67,16 @@ const modUsuario = async (req,res) =>{
 }
 /**
  * Validar login usuario
- * @param {String} req Se obtiene el username y pass del body
+ * @param {String} req Se obtiene el userName y pass del body
  * @param {*} res 
  * @returns Retorna los datos del usuario logeado
  */
 const validarLoginUsuario = async (req, res) => {
     try {
-        const { username, pass } = req.body
 
-        const result = await fnValidarLoginUsuario(username, pass);
+        const { userName, password } = req.body
+
+        const result = await fnValidarLoginUsuario(userName, password);
 
         sendOk(res, `Usuario logeado correctamente`, ...result);
 

@@ -8,6 +8,7 @@ const crearTarea = async (req, res) => {
     try {
 
         const tar = new Tarea(req.body);
+
         const [{ id_tarea }] = await fnCrearTarea(tar);
 
         sendOk(res, `Tarea con el id ${id_tarea} creada correctamente`, { id_tarea });
@@ -44,7 +45,7 @@ const eliminarTarea = async (req, res) => {
         sendOk(res, `Tarea con el id ${idTarea} eliminada`, id_tarea);
 
     } catch (error) {
-        console.log(error);
+
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }
@@ -56,12 +57,16 @@ const eliminarTarea = async (req, res) => {
  */
 const modTarea = async (req, res) => {
     try {
-        const { idTarea } = req.params
-        const tarea = new Tarea(req.body)
+        const { idTarea } = req.params;
+
+        const tarea = new Tarea(req.body);
+
         const [{ id_tarea }] = await fnModificarTarea(idTarea, tarea)
+
         sendOk(res, `Tarea ${id_tarea} ha sido modificada correctamente`, { id_tarea });
+
     } catch (error) {
-        internalError(res, `${error.message || 'error no controlado'}`, error); 
+        internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }
 

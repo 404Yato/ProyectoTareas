@@ -1,6 +1,6 @@
 const db = require("../config/db/config");
 
-const { fnCrearUsuario, fnValidarLoginUsuario, fnObtenerUsuarios, fnObtenerUsuarioById, fnEliminarUsuario} = require('../config/storedFunction/call/usuario');
+const { fnCrearUsuario, fnValidarLoginUsuario, fnObtenerUsuarios, fnObtenerUsuarioById, fnEliminarUsuario } = require('../config/storedFunction/call/usuario');
 const { fnModificarUsuario } = require("../config/storedFunction/call/usuario/modificar_usuario");
 const { User } = require("../model/userModel");
 const { sendOk, internalError } = require("../utils/http");
@@ -12,8 +12,11 @@ const { sendOk, internalError } = require("../utils/http");
  */
 const getUsuarios = async (req, res) => {
     try {
-        const resp = await db.sequelize.query(`select * from usuario`, { type: db.Sequelize.QueryTypes.SELECT });
-        console.log(resp)
+
+        const resp = await fnObtenerUsuarios();
+
+        sendOk(res, `Listado de usuarios`, resp);
+
     } catch (error) {
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
@@ -27,7 +30,7 @@ const getUsuarios = async (req, res) => {
  */
 const crearUsuario = async (req, res) => {
     try {
-        
+
         const user = new User(req.body);
 
         const [{ id_usuario }] = await fnCrearUsuario(user);
@@ -35,6 +38,7 @@ const crearUsuario = async (req, res) => {
         sendOk(res, `Usuario ${id_usuario} ha sido creado correctamente`, { id_usuario });
 
     } catch (error) {
+
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }
@@ -48,20 +52,24 @@ const eliminarUsuario = async (req, res) => {
         sendOk(res, `Usuario con el id ${idUser} eliminado`, id_user);
 
     } catch (error) {
-        console.log(error);
+
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }
 
-const modUsuario = async (req,res) =>{
+const modUsuario = async (req, res) => {
     try {
-        const { idUser } = req.params
-        const user = new User(req.body)
-        const [{ id_user }] = await fnModificarUsuario(idUser,user)
-        console.log(id_user)
-        sendOk(res,`Usuario ${ id_user } ha sido modificado correctamente`, { id_user })
+        const { idUser } = req.params;
+
+        const user = new User(req.body);
+
+        const [{ id_user }] = await fnModificarUsuario(idUser, user);
+
+        sendOk(res, `Usuario ${id_user} ha sido modificado correctamente`, { id_user });
+
     } catch (error) {
-        console.log(error)
+
+        internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }
 /**
@@ -80,6 +88,7 @@ const validarLoginUsuario = async (req, res) => {
         sendOk(res, `Usuario logeado correctamente`, ...result);
 
     } catch (error) {
+
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }
@@ -95,6 +104,7 @@ const obtenerUsuarioById = async (req, res) => {
         sendOk(res, `Usuario con el id ${idUser} encontrado correctamente`, ...result);
 
     } catch (error) {
+
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }

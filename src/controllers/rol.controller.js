@@ -10,7 +10,7 @@ const getRoles = async (req, res) => {
         sendOk(res, `Roles encontrados correctamente`, resp);
 
     } catch (error) {
-        console.log(error)
+
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 }
@@ -21,9 +21,8 @@ const crearRols = async (req, res) => {
 
         sendOk(res, `Rol con el id ${id_rol} creado correctamente`, { id_rol });
 
-        return;
     } catch (error) {
-        console.log(error.message)
+
         internalError(res, `${error.message || 'error no controlado'}`, error);
     }
 

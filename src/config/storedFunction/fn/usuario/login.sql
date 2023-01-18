@@ -4,13 +4,14 @@
  * Creator: Cristian Tapia
  * Description: Validar login usuario
  * Date: 22-12-2022
+ * Modified: 18-01-2023
  * select * from fn_validar_usuario('prueba','prueba')
  */
 
 CREATE OR REPLACE FUNCTION fn_validar_usuario(
 	p_username character varying,
 	p_pass character varying)
-    RETURNS TABLE(id_user integer, email character varying, username character varying, rol_id_rol integer) 
+    RETURNS TABLE(id_user integer, name character varying, lastname character varying, rol_id_rol integer) 
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE PARALLEL UNSAFE
@@ -25,7 +26,7 @@ AS $BODY$
         END IF;
 
         RETURN QUERY
-          SELECT u.id_user, u.email, u.username, u.rol_id_rol FROM USUARIO AS u WHERE u.username = p_username and u.password = p_pass;
+          SELECT u.id_user, u.name, u.lastname, u.rol_id_rol FROM USUARIO AS u WHERE u.username = p_username and u.password = p_pass;
         exception 
         when others then 
             RAISE;

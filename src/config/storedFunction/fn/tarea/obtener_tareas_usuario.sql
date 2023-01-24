@@ -1,7 +1,7 @@
 /**
  * Name: fn_obtener_tareas_usuario
  * Creator: Cristian Tapia
- * Description: Obtener todas las tareas que corresponden a un usuario
+ * Description: Obtener todos las tareas asignadas a un usuario
  * Date: 24-01-2023
  * SELECT * FROM fn_obtener_tareas_usuario(1)
  */

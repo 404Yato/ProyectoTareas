@@ -9,7 +9,8 @@ const defaultPath = process.env.DEFAULT_PATH_API;
 router.get(`/${defaultPath}/tarea/obtener-tareas`, tareaController.getTareas);
 router.post(`/${defaultPath}/tarea/crearTarea`, [validBodyLength],tareaController.crearTarea);
 router.delete(`/${defaultPath}/tarea/eliminarTarea/:idTarea`, tareaController.eliminarTarea);
-
 router.post(`/${defaultPath}/tarea/modTarea/:idTarea`, [validBodyLength], tareaController.modTarea);
+router.get(`/${defaultPath}/tarea/obtener-tareas-u/:idUsuario`, tareaController.tareasUsuario);
+router.get(`/${defaultPath}/tarea/obtener-tareas-e/:idEmisor`, tareaController.tareasEmisor);
 
 module.exports = router;

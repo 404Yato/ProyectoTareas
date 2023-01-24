@@ -1,5 +1,5 @@
-const { fnObtenerTareas, fnCrearTarea, fnModificarTarea } = require("../config/storedFunction/call/tarea");
-const { deleteTarea: fnEliminarTarea } = require('../config/storedFunction/call/tarea/eliminar_tarea')
+const { fnObtenerTareas, fnCrearTarea, fnModificarTarea, fnObtenerTareasUsuario, fnObtenerTareasEmisor } = require("../config/storedFunction/call/tarea");
+const { deleteTarea: fnEliminarTarea } = require('../config/storedFunction/call/tarea/eliminar_tarea');
 const { Tarea } = require("../model/tareaModel");
 const { sendOk, internalError, badRequest } = require("../utils/http");
 
@@ -70,10 +70,32 @@ const modTarea = async (req, res) => {
     }
 }
 
+const tareasUsuario = async (req, res) => {
+    try {
+        const {idUsuario} = req.params;
+        const result = await fnObtenerTareasUsuario(idUsuario)
+        sendOk(res, `Se han recuperado ${result.length} tareas`, result)
+    } catch (error) {
+        internalError(res, `${error.message || 'error no controlado'}`, error);
+    }
+}
+
+const tareasEmisor = async (req, res) => {
+    try {
+        const {idEmisor} = req.params;
+        const result = await fnObtenerTareasEmisor(idEmisor)
+        sendOk(res, `Se han recuperado ${result.length} tareas`, result)
+    } catch (error) {
+        internalError(res, `${error.message || 'error no controlado'}`, error);
+    }
+}
+
 module.exports = {
     crearTarea,
     getTareas,
     eliminarTarea,
-    modTarea
+    modTarea,
+    tareasUsuario,
+    tareasEmisor
 }
 
